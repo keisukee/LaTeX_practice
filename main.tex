@@ -1,0 +1,227 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+
+\begin{document}
+
+\title{［改訂第7版］LaTeX2ε美文書作成入門}
+\author{奥村晴彦 and 黒木裕介}
+\date{2017/1/24}
+\maketitle
+
+\section{序章}
+\subsection{チャーチルのメモ}
+\begin{flushright}
+  flushright
+\end{flushright}
+
+\begin{center}
+  center
+\end{center}
+
+\begin{flushleft}
+  flushleft
+\end{flushleft}
+
+\begin{enumerate}
+\item 第1レベルの箇条書き
+  \begin{enumerate}
+  \item 第2レベルの箇条書き
+    \begin{enumerate}
+    \item 第3レベルの箇条書き
+    \end{enumerate}
+  \end{enumerate}
+\end{enumerate}
+
+\begin{enumerate}
+  \item No.1
+\end{enumerate}
+
+\section{数式}
+\subsection{数式の出力}
+
+
+\[
+ y = ax^2 + bx + c
+\]
+
+\begin{flushright}
+  $2^{2^{2^{2}}}$
+\end{flushright}
+Note the difference.
+\begin{equation}
+  y = ax^2 + bx + c
+\end{equation}
+
+\[
+  \sum_{k=1}^n a_k = a_1 + a_2 + a_3 + \cdots + a_n
+\]
+\begin{equation}
+  \sum_{k=1}^n a_k = a_1 + a_2 + a_3 + \cdots + a_n
+\end{equation}
+
+\subsection{色々な数学記号の出力}
+\[ y=\frac{1+x}{1-x}\]
+
+\subsection{式の参照}
+labelをつけて、この名前で管理できる。
+\begin{equation}
+  E = mc^2 \label{eq:Einstein}
+\end{equation}
+
+\pageref{eq:Einstein} ページの式 (\ref{eq:Einstein}) によれば...
+ただし、このような参照機能を用いる際には文書ファイルを複数回処理しないといけない。参照番号をインデックス化するから。
+
+\subsection{ギリシャ文字}
+ギリシャ文字は超かっこいいので、ぜひともしっかりと出力したい。
+
+\[
+\alpha +
+\beta +
+\gamma +
+\delta +
+\epsilon +
+\zeta +
+\eta +
+\theta +
+\iota +
+\kappa +
+\lambda +
+\mu +
+\nu +
+\xi +
+o +
+\pi +
+\rho +
+\sigma +
+\tau +
+\upsilon +
+\phi +
+\chi +
+\psi +
+\omega + \dotsb
+\]
+
+大文字にしたいなら、先頭をCapitalにすること。
+\[
+\Theta
+\Sigma
+\]
+
+\subsection{演算子}
+二項演算子
+\[
+\pm
+\mp
+\times
+\div
+\oplus
+\ominus
+\otimes
+\]
+関係演算子
+\[
+  < \le \leq > \ge \geq
+\]
+
+\subsection{矢印}
+\[
+A \Leftrightarrow B
+\]
+
+\subsection{高度な数式}
+packageを使う。packageはプリアンブルで読み込む。
+プリアンブルとは documentclass{…} と begin{document} の間の部分のこと。
+
+\[
+\begin{matrix}
+  a & b \\ c & d
+\end{matrix}
+\]
+
+\[
+\begin{pmatrix}
+  x & y \\ z & w
+\end{pmatrix}
+\]
+
+\begin{equation}
+  \begin{vmatrix}
+    a & b \\ c & d
+  \end{vmatrix}
+\end{equation}
+
+\subsection{別行立ての数式}
+複数の数式を並べるにはgatherを使う。
+
+\begin{gather}
+  (a + b)^2 = a^2 + 2ab + b^2 \\
+  (a - b)^2 = a^2 - 2ab + b^2 \notag \\
+\end{gather}
+
+位置を揃えた複数行の数式全体の中央に番号を振るには、split環境、もしくは、aligned環境で位置を揃え、全体をほかの数式環境の中に入れて番号を振る。
+
+split環境
+\begin{equation}
+  \begin{split}
+    \sinh^{-1} x &= \log(x + \sqrt{x^2 + 1}) \\
+                 &= x - x^3\!/6 + 3x^5\!/40 + \dotsb
+  \end{split}
+\end{equation}
+
+aligned環境
+\begin{equation}
+  \begin{aligned}
+    \sinh^{-1} x &= \log(x + \sqrt{x^2 + 1}) \\
+                 &= x - x^3\!/6 + 3x^5\!/40 + \dotsb
+  \end{aligned}
+\end{equation}
+
+\subsection{表組み}
+
+罫線なし
+\begin{center}
+  \begin{tabular}{lrr}
+    品名 & 単価(円) & 個数 \\
+    りんご & 100 & 5 \\
+    みかん & 50 & 10
+  \end{tabular}
+\end{center}
+
+横罫線のみ
+booktabsパッケージを使う。プリアンブルで読み込む。
+\begin{center}
+  \begin{tabular}{lrr} \toprule
+    品名 & 単価(円) & 個数 \\ \midrule
+    りんご & 100 & 5 \\
+    みかん & 50 & 10 \\ \bottomrule
+  \end{tabular}
+\end{center}
+
+\LaTeX 標準の罫線
+必ずしも必要ではないが、arrayパッケージを入れておくと、綺麗になる。
+\begin{center}
+  \begin{tabular}{lrr} \hline
+    品名 & 単価(円) & 個数 \\ \hline
+    りんご & 100 & 5 \\
+    みかん & 50 & 10 \\ \hline
+  \end{tabular}
+\end{center}
+
+\subsection{参考文献}
+文献リストを出力
+\begin{thebibliography}{9}
+\item
+  木下是雄 『理科系の作文技術』
+  中公新書624（中央公論社, 1981）
+\item
+  Mary-Claire van Leunen.
+  \textit{A Handbook for Scholars}.
+  Alfred A. Knopf, 1978.
+\end{thebibliography}
+
+上の例で、begin{thebibliography}{9}の9は、参考文献に付ける番号が1桁以内であることを示す。
+2桁以内なら{99}、3桁以内なら{999}などと表す。
+
+\end{document}
